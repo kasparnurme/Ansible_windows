@@ -1,0 +1,23 @@
+---
+- name: windows paringud
+  hosts: windows
+  gather_facts: no
+
+  tasks:
+    - name: Hangi kasutajanimi
+      ansible.windows.win_command:
+        cmd: whoami
+      register: whoami_result
+
+    - name: Kuva kasutajanimi
+      debug:
+        msg: "{{ inventory_hostname }} praegune kasutaja on {{ whoami_result.stdout | trim }}"
+
+    - name: Loetle C-draivi sisu
+      ansible.windows.win_command:
+        cmd: dir C:\
+      register: dir_result
+
+    - name: Kuva C-draivi sisu
+      debug:
+        msg: "{{ inventory_hostname }} C-draivi sisu: {{ dir_result.stdout_lines }}"

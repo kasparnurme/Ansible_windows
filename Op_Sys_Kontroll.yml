@@ -1,0 +1,7 @@
+- name: Kontrolli masinate olekut ja OS versiooni
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Kontrolli, kas masin UP
+      debug:
+        msg: "Masina nimi: {{ inventory_hostname }} | Operatsioonisüsteem: {{ ansible_distribution }} versioon: {{ ansible_distribution_version }}"
